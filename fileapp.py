@@ -6,3 +6,6 @@ from flask import request
 import os
 import subprocess
 import shutil
+
+# App
+app = Flask(__name__)
