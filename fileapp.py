@@ -46,4 +46,23 @@ def root():
     ''', # use 'dir' command on Windows
     current_working_directory=os.getcwd(),
          file_list=subprocess.check_output('ls', shell=True).decode('utf-8').split('\n'))
+
+# Handle 'cd' command
+@app.route('/cd')
+def cd():
+    # run 'level up' command
+    os.chdir(request.args.get('path'))
+    
+    # redirect to file manager
+    return redirect('/')
+
+# handle 'make directory' command
+@app.route('/md')
+def md():
+    # create new folder
+    os.mkdir(request.args.get('folder'))
+    
+    # redirect to fole manager
+    return redirect('/')
+
     
