@@ -50,19 +50,18 @@ def root():
 # Handle 'cd' command
 @app.route('/cd')
 def cd():
-    # run 'level up' command
+    # Run 'level up' command
     os.chdir(request.args.get('path'))
     
-    # redirect to file manager
+    # Redirect to file manager
     return redirect('/')
 
 # handle 'make directory' command
 @app.route('/md')
 def md():
-    # create new folder
+    # Create new folder
     os.mkdir(request.args.get('folder'))
     
-    # redirect to fole manager
+    # Redirect to file manager
     return redirect('/')
 
-    
