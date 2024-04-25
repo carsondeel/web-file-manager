@@ -43,7 +43,7 @@ def root():
             </ul>
           </body>
         </html>
-    ''', # use 'dir' command on Windows
+    ''', # Use 'dir' command on Windows
     current_working_directory=os.getcwd(),
          file_list=subprocess.check_output('ls', shell=True).decode('utf-8').split('\n'))
 
@@ -56,7 +56,7 @@ def cd():
     # Redirect to file manager
     return redirect('/')
 
-# handle 'make directory' command
+# Handle 'make directory' command
 @app.route('/md')
 def md():
     # Create new folder
@@ -65,3 +65,21 @@ def md():
     # Redirect to file manager
     return redirect('/')
 
+@app.route('/rm')
+def rm():
+    # 'rm' command
+    shutil.rmtree(os.getcwd() + '/' + request.args.get('dir'))
+    
+    # Redirect to file manager
+    return redirect('/')
+    
+# View files (text)
+@app.route('/view')
+def view():
+    # get the file content
+    with open(request.args.get('file')) as f:
+        return f.read().replace('\n', '<br>')
+
+# Run the HTTP server
+if __name__ == '__main__':
+    app.run(debug=True, threaded=True)
